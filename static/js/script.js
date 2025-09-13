@@ -200,6 +200,25 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Filtrage instantané des projets selon leur statut
+    const filterButtons = document.querySelectorAll('.project-filter');
+    const projectItems = document.querySelectorAll('.project-item');
+
+    filterButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            filterButtons.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            const filter = this.getAttribute('data-filter');
+            projectItems.forEach(item => {
+                if (filter === 'all' || item.getAttribute('data-status') === filter) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    });
+
     // Lazy loading des images
     const images = document.querySelectorAll('img[data-src]');
     
